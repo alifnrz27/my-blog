@@ -12,10 +12,22 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="assets/css/animate.css" />
+        
+        
+        <link rel="stylesheet" href="assets/css/tailwind.css" />
+
+        <!-- ==== WOW JS ==== -->
+        <script src="assets/js/wow.min.js"></script>
+        <script>
+        new WOW().init();
+        </script>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        <!-- ====== All Scripts -->
+    <script src="/assets/js/main.js"></script>
     </body>
 </html>
