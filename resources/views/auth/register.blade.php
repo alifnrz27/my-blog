@@ -22,7 +22,7 @@
                                 <input type="password" name="password" placeholder="Password" class="w-full rounded-md border bordder-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary transition" name="password" required/>
                             </div>
                             <div class="mb-6">
-                                <input type="password" name="password" placeholder="Confirm Password" class="w-full rounded-md border bordder-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary transition" name="password_confirmation" required/>
+                                <input type="password" name="password_confirmation" placeholder="Confirm Password" class="w-full rounded-md border bordder-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary transition" name="password_confirmation" required/>
                             </div>
                             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                             <div class="mt-4">

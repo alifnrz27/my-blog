@@ -79,7 +79,7 @@
         <div class="mt-5">
             @if (! $this->enabled)
                 <x-jet-confirms-password wire:then="enableTwoFactorAuthentication">
-                    <x-jet-button type="button" wire:loading.attr="disabled">
+                    <x-jet-button class="bg-primary" type="button" wire:loading.attr="disabled">
                         {{ __('Enable') }}
                     </x-jet-button>
                 </x-jet-confirms-password>
@@ -92,7 +92,7 @@
                     </x-jet-confirms-password>
                 @elseif ($showingConfirmation)
                     <x-jet-confirms-password wire:then="confirmTwoFactorAuthentication">
-                        <x-jet-button type="button" class="mr-3" wire:loading.attr="disabled">
+                        <x-jet-button type="button" class="mr-3 bg-primary" wire:loading.attr="disabled">
                             {{ __('Confirm') }}
                         </x-jet-button>
                     </x-jet-confirms-password>
@@ -112,7 +112,7 @@
                     </x-jet-confirms-password>
                 @else
                     <x-jet-confirms-password wire:then="disableTwoFactorAuthentication">
-                        <x-jet-danger-button wire:loading.attr="disabled">
+                        <x-jet-danger-button class="bg-primary" wire:loading.attr="disabled">
                             {{ __('Disable') }}
                         </x-jet-danger-button>
                     </x-jet-confirms-password>
