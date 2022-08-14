@@ -52,6 +52,14 @@
                 </div>
                 @if (Route::has('login'))
                     @auth
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+
+                        <x-jet-dropdown-link href="{{ route('logout') }}"
+                                    @click.prevent="$root.submit();">
+                            {{ __('Log Out') }}
+                        </x-jet-dropdown-link>
+                    </form>
                     @else
                     <div class="sm:flex justify-end hidden pr-16 lg:pr-0">
                         <a href="{{ route('login') }}" class="text-base font-medium text-white hover:opacity-70 py-3 px-7 loginBtn">

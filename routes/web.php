@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\JournalController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -19,13 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/journals', function () {
-    return view('journals.index');
-});
-
-Route::get('/journals/detail', function () {
-    return view('journals.detail');
-});
+Route::get('/journals/latest', [JournalController::class, 'latest']);
+Route::resource('/journals', JournalController::class);
 
 Route::middleware([
     'auth:sanctum',
@@ -35,6 +32,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::post('/comments/store', [CommentController::class, 'store']);
+    Route::get('/comments/myPosts', [CommentController::class, 'getMyPosts']);
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy']);
+    Route::get('/comments', [CommentController::class, 'index']);
     
     Route::get('/posts/all', [PostController::class, 'all']);
     Route::resource('/posts', PostController::class);
@@ -44,3 +46,6 @@ Route::middleware([
         return response()->json($slug);
     });
 });
+
+
+Route::get('/comments/{slug}', [CommentController::class, 'get']);

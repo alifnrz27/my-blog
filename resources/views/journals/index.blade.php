@@ -165,6 +165,8 @@
           })
       }
 
-      journals();
+      $( document ).ready(function() {
+          journals();
+      });
   </script>
 </x-guest-layout>

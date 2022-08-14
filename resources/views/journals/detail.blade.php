@@ -6,7 +6,7 @@
         <div class="flex flex-wrap items-center -mx-4">
           <div class="w-full px-4">
             <div class="text-center">
-              <h1 class="font-semibold text-white text-4xl">Ini Judul</h1>
+              <h1 class="font-semibold text-white text-4xl">{{ $post->title }}</h1>
             </div>
           </div>
         </div>
@@ -20,17 +20,19 @@
             <div class="flex flex-wrap justify-center -mx-4">
                 <div class="w-full px-4">
                     <div class=" relative rounded overflow-hidden z-20 mb-[60px] h-[300px] md:h-[400px] lg:h-[500px] wow fadeInUp" data-wow-delay=".1s">
-                        <img src="assets/images/blog/blog-details-01.jpg" alt="image" class="w-full h-full object-cover object-center"/>
+                        <img src="/assets/images/blog/blog-details-01.jpg" alt="image" class="w-full h-full object-cover object-center"/>
                         <div class="absolute w-full h-full top-0 left-0 flex items-end z-10 bg-gradient-to-t from-dark-700 to-transparent">
                             <div class="flex flex-wrap items-center p-4 sm:p-8 pb-4">
                                 <div class="flex items-center mb-4 mr-5 md:mr-10">
                                     <div class="w-10 h-10 rounded-full overflow-hidden mr-4">
-                                        <img src="assets/images/blog/author-01.png" alt="image" class="w-full"/>
+                                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                            <img src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->name }}" class="w-full" />
+                                        @endif
                                     </div>
                                     <p class="text-base text-white font-medium">
                                         By
                                         <a href="javascript:void(0)" class="text-white hover:opacity-70">
-                                            Samuyl Joshi
+                                            {{ $post->user->name }}
                                         </a>
                                     </p>
                                 </div>
@@ -49,7 +51,7 @@
                                                 <path d="M13.2637 3.3697H7.64754V2.58105C8.19721 2.43765 8.62738 1.91189 8.62738 1.31442C8.62738 0.597464 8.02992 0 7.28906 0C6.54821 0 5.95074 0.597464 5.95074 1.31442C5.95074 1.91189 6.35702 2.41376 6.93058 2.58105V3.3697H1.31442C0.597464 3.3697 0 3.96716 0 4.68412V13.2637C0 13.9807 0.597464 14.5781 1.31442 14.5781H13.2637C13.9807 14.5781 14.5781 13.9807 14.5781 13.2637V4.68412C14.5781 3.96716 13.9807 3.3697 13.2637 3.3697ZM6.6677 1.31442C6.6677 0.979841 6.93058 0.716957 7.28906 0.716957C7.62364 0.716957 7.91042 0.979841 7.91042 1.31442C7.91042 1.649 7.64754 1.91189 7.28906 1.91189C6.95448 1.91189 6.6677 1.6251 6.6677 1.31442ZM1.31442 4.08665H13.2637C13.5983 4.08665 13.8612 4.34954 13.8612 4.68412V6.45261H0.716957V4.68412C0.716957 4.34954 0.979841 4.08665 1.31442 4.08665ZM13.2637 13.8612H1.31442C0.979841 13.8612 0.716957 13.5983 0.716957 13.2637V7.16957H13.8612V13.2637C13.8612 13.5983 13.5983 13.8612 13.2637 13.8612Z"/>
                                             </svg>
                                         </span>
-                                        26 Feb 2023
+                                        {{ date("d-m-Y", strtotime($post->created_at)) }}
                                     </p>
 
                                     <p class="flex items-center text-sm font-medium text-white mr-5 md:mr-8">
@@ -60,7 +62,7 @@
                                                 <path d="M11.3908 6.55322H5.03457C4.75332 6.55322 4.52832 6.77822 4.52832 7.05947C4.52832 7.34072 4.75332 7.56572 5.03457 7.56572H11.4189C11.7002 7.56572 11.9252 7.34072 11.9252 7.05947C11.9252 6.77822 11.6721 6.55322 11.3908 6.55322Z"/>
                                             </svg>
                                         </span>
-                                        05
+                                        <span id="totalComments">0</span>
                                     </p>
                                 </div>
                             </div>
@@ -70,101 +72,11 @@
                         <div class="w-full lg:w-8/12 px-4">
                             <div>
                                 <h2 class="font-bold text-dark text-[26px] sm:text-3xl md:text-4xl leading-snug sm:leading-snug md:leading-snug  mb-6 wow fadeInUp" data-wow-delay=".1s">
-                                    Facing a challenge is kind of a turn-on for an easy rider
+                                    {{ $post->title }}
                                 </h2>
-                                <p class="text-base text-body-color leading-relaxed mb-8 wow fadeInUp" data-wow-delay=".1s">
-                                    There's a time and place for everything… including asking
-                                    for reviews. For instance: you should not asking for a
-                                    review on your checkout page. The sole purpose of this page
-                                    is to guide your customer to complete their purchase, and
-                                    this means that the page should be as minimalist and
-                                    pared-down possible. You don't want to have any unnecessary
-                                    elements or Call To Actions.
-                                </p>
-                                <p class="text-base text-body-color leading-relaxed mb-10 wow fadeInUp" data-wow-delay=".1s">
-                                    There's a time and place for everything… including asking
-                                    for reviews. For instance: you should not asking for a
-                                    review on your checkout page. The sole purpose of this page
-                                    is to guide your customer to complete their purchase, and
-                                    this means that the page should be as minimalist and
-                                    pared-down possible. You don't want to have any unnecessary
-                                    elements or Call To Actions.
-                                </p>
-                                <h3 class="font-bold mb-8 text-dark text-2xl sm:text-[26px] wow fadeInUp" data-wow-delay=".1s">
-                                    Sea no quidam vulputate
-                                </h3>
-                                <p class="text-base text-body-color leading-relaxed mb-8 wow fadeInUp" data-wow-delay=".1s">
-                                    There's a time and place for everything… including asking
-                                    for reviews. For instance: you should not asking for a
-                                    review on your checkout page. The sole purpose of this page
-                                    is to guide your customer to complete their purchase, and
-                                    this means that the page should be as minimalist and
-                                    pared-down possible. You don't want to have any unnecessary
-                                    elements or Call To Actions.
-                                </p>
-                                <div class="bg-primary bg-opacity-5 rounded overflow-hidden relative py-8 px-6 sm:p-10 md:px-[60px] text-center z-10 mb-10 wow fadeInUp" data-wow-delay=".1s">
-                                    <div class="max-w-[530px] mx-auto">
-                                        <span class="flex justify-center mb-6 text-primary">
-                                            <svg width="44" height="26" viewBox="0 0 44 26" class="fill-current">
-                                                <path d="M10.1101 0.00124908C5.46698 -0.0701833 1.25247 2.92998 0.252417 7.00162C-0.319041 9.50175 0.180985 12.0019 1.68106 14.002C3.25258 16.145 5.68128 17.5022 8.39571 17.8593L10.8958 24.0025C11.1816 24.6454 11.8245 25.074 12.5388 25.074C13.2531 25.074 13.896 24.6454 14.1817 24.0025C14.6103 22.931 15.1103 21.7881 15.6104 20.7166C16.8247 18.0022 18.0391 15.2163 18.9677 12.359C19.9677 9.35889 19.5392 6.14443 17.8248 3.71573C16.1104 1.35846 13.396 0.0726814 10.1101 0.00124908ZM16.6104 11.6447C15.6818 14.3592 14.4675 17.145 13.3245 19.788C13.1102 20.3595 12.8245 20.8595 12.6102 21.431L10.1815 15.5735L9.39576 15.5021C7.10992 15.3592 4.96695 14.2163 3.7526 12.5733C2.68112 11.1447 2.32396 9.35889 2.75255 7.64451C3.46687 4.71579 6.53846 2.57281 10.0386 2.57281H10.1101C12.5388 2.57281 14.5389 3.57287 15.8247 5.28724C17.039 7.00162 17.3247 9.43032 16.6104 11.6447Z"/>
-                                                <path d="M42.3267 3.78726C40.6124 1.35856 37.8979 0.00134277 34.612 0.00134277C34.5406 0.00134277 34.5406 0.00134277 34.4692 0.00134277C29.8975 0.00134277 25.7544 3.0015 24.7544 7.00171C24.1829 9.50185 24.6829 12.002 26.183 14.0735C27.7545 16.2165 30.1832 17.5737 32.8977 17.9309L35.3978 24.074C35.6835 24.7169 36.3264 25.1455 37.0407 25.1455C37.7551 25.1455 38.398 24.7169 38.6837 24.074C39.1123 23.0026 39.6123 21.8596 40.1123 20.7882C41.3267 18.0737 42.541 15.2879 43.4696 12.4306C44.4697 9.50184 44.0411 6.21596 42.3267 3.78726ZM41.1124 11.6448C40.1838 14.3592 38.9694 17.1451 37.8265 19.7881C37.6122 20.3596 37.3265 20.8596 37.1122 21.431L34.6835 15.5736L33.8977 15.5022C31.6119 15.3593 29.4689 14.2164 28.2546 12.5734C27.1831 11.1448 26.8259 9.35898 27.2545 7.57317C27.9688 4.64445 31.0404 2.50147 34.5406 2.50147H34.612C37.0407 2.50147 39.0408 3.50153 40.3266 5.2159C41.541 7.00171 41.8267 9.43041 41.1124 11.6448Z"/>
-                                            </svg>
-                                        </span>
-                                        <p class="font-medium text-dark text-base italic leading-[26px] mb-4">
-                                            A spring of truth shall flow from it: like a new star it
-                                            shall scatter the darkness of ignorance, and cause a
-                                            light heretofore unknown to shine amongst men.
-                                        </p>
-                                        <span class="text-sm text-body-color italic">
-                                            “Andrio Domeco”
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span class="absolute left-0 top-0">
-                                            <svg width="103" height="109" viewBox="0 0 103 109" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <ellipse cx="0.483916" cy="3.5" rx="102.075" ry="105.5" transform="rotate(180 0.483916 3.5)" fill="url(#paint0_linear)"/>
-                                                <defs>
-                                                    <linearGradient id="paint0_linear" x1="-101.591" y1="-50.4346" x2="49.1618" y2="-49.6518" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#3056D3" stop-opacity="0.15" />
-                                                        <stop offset="1" stop-color="white" stop-opacity="0"/>
-                                                    </linearGradient>
-                                                </defs>
-                                            </svg>
-                                        </span>
-                                        <span class="absolute bottom-0 right-0">
-                                            <svg width="102" height="106" viewBox="0 0 102 106" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <ellipse cx="102.484" cy="105.5" rx="102.075" ry="105.5" fill="url(#paint0_linear)"/>
-                                                <defs>
-                                                    <linearGradient id="paint0_linear" x1="0.409163" y1="51.5654" x2="151.162" y2="52.3482" gradientUnits="userSpaceOnUse">
-                                                        <stop stop-color="#3056D3" stop-opacity="0.5" />
-                                                        <stop offset="1" stop-color="white" stop-opacity=".2"/>
-                                                    </linearGradient>
-                                                </defs>
-                                            </svg>
-                                        </span>
-                                    </div>
+                                <div class="wow fadeInUp mb-10">
+                                    {{ $post->content }}
                                 </div>
-
-                                <h3 class="font-bold mb-8 text-dark text-2xl sm:text-[26px] wow fadeInUp" data-wow-delay=".1s">
-                                    What is it with your ideas?
-                                </h3>
-
-                                <p class="text-base text-body-color leading-relaxed mb-8 wow fadeInUp" data-wow-delay=".1s">
-                                    At quo cetero fastidii. Usu ex ornatus corpora sententiae,
-                                    vocibus deleniti ut nec. Ut enim eripuit eligendi est, in
-                                    iracundia signiferumque quo. Sed virtute suavitate
-                                    suscipiantur ea, dolor this can eloquentiam ei pro. Suas
-                                    adversarium interpretaris eu sit, eum viris impedit ne.
-                                    Erant appareat corrumpit ei vel.
-                                </p>
-                                <p class="text-base text-body-color leading-relaxed mb-8 wow fadeInUp" data-wow-delay=".1s">
-                                    At quo cetero fastidii. Usu ex ornatus corpora sententiae,
-                                    vocibus deleniti ut nec. Ut enim eripuit eligendi est, in
-                                    iracundia signiferumque quo. Sed virtute suavitate
-                                    suscipiantur ea, dolor this can eloquentiam ei pro. Suas
-                                    adversarium interpretaris eu sit, eum viris impedit ne.
-                                    Erant appareat corrumpit ei vel.
-                                </p>
 
                                 <div class="flex flex-wrap items-center -mx-4 mb-12">
                                     <div class="w-full md:w-1/2 px-4">
@@ -206,6 +118,38 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- Comment section --}}
+                                <h2 class="font-bold text-dark text-[26px] sm:text-3xl md:text-4xl leading-snug sm:leading-snug md:leading-snug  mb-6 wow fadeInUp" data-wow-delay=".1s">
+                                    Comments
+                                </h2>
+                                @auth
+                                <div class="wow fadeInUp mb-10">
+                                    <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                                        <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+                                            <div class="flex justify-between">
+                                                <p class="mb-0 dark:text-white/80">Add new comment</p>
+                                                <button type="submit" onclick="addComment('{{ $post->slug }}')" class="inline-block px-8 py-2 mb-4 font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-primary bg-150 text-size-xs hover:shadow-xs hover:-translate-y-px">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="flex-auto px-6">
+                                            <div class="flex flex-wrap -mx-3">
+                                                <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                                    <div class="mb-4">
+                                                        <label for="comment" class="inline-block mb-2 ml-1 font-bold text-size-xs text-slate-700 dark:text-white/80">Comment</label>
+                                                        <textarea placeholder="type here" type="text" id="comment" name="comment"  class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-dark text-size-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @else
+                                <a href="/login" class="wow fadeInUp inline-block px-8 py-2 mb-4 font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-primary bg-150 text-size-xs hover:shadow-xs hover:-translate-y-px">Sign in for comment</a>
+                                @endauth
+                                <div id="comments" data-slug="{{ $post->slug }}">
+                                    
+                                </div>
+                                {{-- end comment section --}}
                             </div>
                         </div>
                         <div class="w-full lg:w-4/12 px-4">
@@ -213,69 +157,12 @@
                                 <div class="flex flex-wrap -mx-4 mb-8">
                                     <div class="w-full px-4">
                                         <h2 class="font-semibold text-dark text-2xl sm:text-[28px] pb-5 relative wow fadeInUp" data-wow-delay=".1s">
-                                            Popular Articles
+                                            Latest Articles
                                         </h2>
                                         <span class="h-[2px] bg-primary w-20 mb-10 inline-block"></span>
                                     </div>
-                                    <div class="w-full md:w-1/2 lg:w-full px-4">
-                                        <div class="w-full flex items-center pb-5 mb-5 border-b border-[#F2F3F8] wow fadeInUp" data-wow-delay=".1s">
-                                            <div class="w-full max-w-[80px] h-20 rounded-full overflow-hidden mr-5">
-                                                <img src="/assets/images/blog/article-author-01.png" alt="image" class="w-full"/>
-                                            </div>
-                                            <div class="w-full">
-                                                <h4>
-                                                    <a href="javascript:void(0)" class="text-lg lg:text-base xl:text-lg leading-snug font-medium text-dark hover:text-primary mb-1 inline-block">
-                                                        Create engaging online courses your student…
-                                                    </a>
-                                                </h4>
-                                                <p class="text-sm text-body-color">Glomiya Lucy</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="w-full md:w-1/2 lg:w-full px-4">
-                                        <div class="w-full flex items-center pb-5 mb-5 border-0 border-[#F2F3F8] md:border-b lg:border-0 wow fadeInUp" data-wow-delay=".1s">
-                                            <div class="w-full max-w-[80px] h-20 rounded-full overflow-hidden mr-5">
-                                                <img src="/assets/images/blog/article-author-04.png" alt="image" class="w-full"/>
-                                            </div>
-                                            <div class="w-full">
-                                                <h4>
-                                                    <a href="javascript:void(0)" class="text-lg lg:text-base xl:text-lg leading-snug font-medium text-dark hover:text-primary mb-1 inline-block">
-                                                        The 8 best landing page builders, reviewed
-                                                    </a>
-                                                </h4>
-                                                <p class="text-sm text-body-color">Andrio Glori</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="w-full md:w-1/2 lg:w-full px-4">
-                                        <div class="w-full flex items-center pb-5 mb-5 border-0 border-[#F2F3F8] md:border-b lg:border-0 wow fadeInUp" data-wow-delay=".1s">
-                                            <div class="w-full max-w-[80px] h-20 rounded-full overflow-hidden mr-5">
-                                                <img src="/assets/images/blog/article-author-04.png" alt="image" class="w-full"/>
-                                            </div>
-                                            <div class="w-full">
-                                                <h4>
-                                                    <a href="javascript:void(0)" class="text-lg lg:text-base xl:text-lg leading-snug font-medium text-dark hover:text-primary mb-1 inline-block">
-                                                        The 8 best landing page builders, reviewed
-                                                    </a>
-                                                </h4>
-                                                <p class="text-sm text-body-color">Andrio Glori</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="w-full md:w-1/2 lg:w-full px-4">
-                                        <div class="w-full flex items-center pb-5 mb-5 border-0 border-[#F2F3F8] md:border-b lg:border-0 wow fadeInUp" data-wow-delay=".1s">
-                                            <div class="w-full max-w-[80px] h-20 rounded-full overflow-hidden mr-5">
-                                                <img src="/assets/images/blog/article-author-04.png" alt="image" class="w-full"/>
-                                            </div>
-                                            <div class="w-full">
-                                                <h4>
-                                                    <a href="javascript:void(0)" class="text-lg lg:text-base xl:text-lg leading-snug font-medium text-dark hover:text-primary mb-1 inline-block">
-                                                        The 8 best landing page builders, reviewed
-                                                    </a>
-                                                </h4>
-                                                <p class="text-sm text-body-color">Andrio Glori</p>
-                                            </div>
-                                        </div>
+                                    <div id="latestArticles">
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -300,7 +187,7 @@
                         </div>
                     <div>
                     <span class="bg-primary rounded inline-block text-center py-1 px-4 text-xs leading-loose font-semibold text-white mb-5">
-                        Dec 22, 2023
+                        2022-232-3
                     </span>
                     <h3>
                         <a href="blog-details.html" class="font-semibold text-xl sm:text-2xl lg:text-xl xl:text-2xl mb-4 inline-block text-dark hover:text-primary">
@@ -363,4 +250,103 @@
     </section>
     <!-- ====== Journal Details Section End -->
     <x-footer></x-footer>
+
+    <script>
+        $.ajaxSetup({
+          headers:{
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      })
+        function LatestArticles(){
+            $.ajax({
+                type:"GET",
+                dataType:'json',
+                url: "/journals/latest",
+                success: function(data){
+                    var dataHTML = ""
+                    if (data.length < 1){
+                        dataHTML = dataHTML + `<div class="text-center">no post</div>`
+                    }
+                    data.forEach(element => {
+                        dataHTML = dataHTML + `<a href="/journals/${element.slug}">
+                                                    <div class="w-full md:w-1/2 lg:w-full px-4">
+                                                        <div class="w-full flex items-center pb-5 mb-5 border-b border-[#F2F3F8] wow fadeInUp" data-wow-delay=".1s">
+                                                            <div class="w-full max-w-[80px] h-20 rounded-full overflow-hidden mr-5">
+                                                                <img src="/assets/images/blog/article-author-01.png" alt="image" class="w-full"/>
+                                                            </div>
+                                                            <div class="w-full">
+                                                                <h4>
+                                                                    <p class="text-lg lg:text-base xl:text-lg leading-snug font-medium text-dark hover:text-primary mb-1 inline-block">
+                                                                        ${element.title}
+                                                                    </p>
+                                                                </h4>
+                                                                <p class="text-sm text-body-color">${element.user.name}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>`
+                    });
+                    $('#latestArticles').empty()
+                    $('#latestArticles').html(dataHTML);
+                }
+            })
+        }
+
+        function comments(){
+            var slug = $("#comments").attr("data-slug")
+            $.ajax({
+                type:"GET",
+                dataType:'json',
+                url: "/comments/"+slug,
+                success: function(data){
+                    var dataHTML = ""
+                    if (data.length < 1){
+                        dataHTML = dataHTML + `<div class="text-center text-dark">no comment found</div>`
+                    }
+                    $.each(data, function(key,value){
+                        dataHTML = dataHTML + `<div class="wow fadeInUp mb-10">
+                                                    <div class="max-w-sm w-full lg:max-w-full lg:flex">
+                                                        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                                                            <div class="mb-8">
+                                                                <p class="text-gray-700 text-base">${value.comment}</p>
+                                                            </div>
+                                                            <div class="flex items-center">
+                                                                <div class="text-sm">
+                                                                    <p class="text-gray-900 leading-none">${value.user.name}</p>
+                                                                    <p class="text-gray-600">${new Date(value.created_at)}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`
+                    })
+                    $('#totalComments').empty()
+                    $('#totalComments').html(data.length)
+                    $('#comments').empty()
+                    $('#comments').html(dataHTML);
+                }
+            })
+        }
+
+
+        function addComment(slug){
+            var comment = $('#comment').val()
+
+            $.ajax({
+                type:"POST",
+                dataType:'json',
+                data: {slug:slug, comment:comment},
+                url: "/comments/store",
+                success: function(data){
+                    $('#comment').val("")
+                    comments()
+                }
+            })
+        }
+
+        $( document ).ready(function() {
+            LatestArticles()
+            comments()
+        });
+    </script>
 </x-guest-layout>

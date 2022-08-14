@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class JournalController extends Controller
@@ -13,7 +14,7 @@ class JournalController extends Controller
      */
     public function index()
     {
-        //
+        return view('journals.index');
     }
 
     /**
@@ -43,9 +44,21 @@ class JournalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $post = Post::where(['slug'=> $slug, 'status_id' => 1])->first();
+
+        // dd($post->user);
+        if(!$post){
+            abort(404);
+        }
+
+        if ($post->status_id == 2){
+            abort(404);
+        }
+
+
+        return view('journals.detail', ['post' => $post]);
     }
 
     /**
@@ -80,5 +93,10 @@ class JournalController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function latest(){
+        $data = Post::with('user')->where(['status_id' => 1])->limit(7)->latest()->get();
+        return response()->json($data);
     }
 }
