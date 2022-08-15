@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -49,3 +50,6 @@ Route::middleware([
 
 
 Route::get('/comments/{slug}', [CommentController::class, 'get']);
+Route::delete('/tags', [TagController::class, 'destroy']);
+Route::get('/tags/{id}', [TagController::class, 'get']);
+Route::resource('/tags', TagController::class)->except('destroy');

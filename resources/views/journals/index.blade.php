@@ -124,7 +124,7 @@
                   var dataHTMLGrid = ""
                   var dataHTMLCarousel = `<div class="flex justify-center carousel-inner relative w-full overflow-hidden" style="margin-top: -30px">
                                             <div class="flex justify-center text-center carousel-item active float-left" style="width:80%">
-                                              <a href="" class="text-center">
+                                              <a href="/journals/${data[0].slug}" class="text-center">
                                                   <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg" class="block w-full" alt="..." style="border-radius:15px; box-shadow:5px 5px 3px black; -webkit-filter: blur(1px);"/>
                                                   <div class="text-white text-center" style="margin-top: -90px; position:absolute"><h2 class="text-white" style="font-size: 30px;">${data[0].title}</h2></div>
                                               </a>

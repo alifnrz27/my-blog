@@ -21,8 +21,22 @@
                                         <label class="switch">
                                             <input type="checkbox" name="status_id" <?php if($status_id ==1){echo "checked";} ?>>
                                             <span class="slider round">Publish</span>
-                                          </label>
+                                        </label>
                                     </div>
+                                    {{-- menampilkan tags --}}
+                                    <div class="w-full">
+                                        <div class="flex flex-wrap items-center -mx-4 mb-12">
+                                            <div class="w-full md:w-1/2 px-4">
+                                                <label for="tag" class="inline-block mb-2 ml-1 font-bold text-size-xs text-slate-700 dark:text-white/80">Tags</label>
+                                                <input placeholder="add new tag" type="text" id="tag" name="tag"class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-dark text-size-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none mb-4" />
+                                                <div style='cursor: pointer' onclick="addTag()" class="inline-block px-8 py-2 font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-primary bg-150 text-size-xs hover:shadow-xs hover:-translate-y-px  mb-10">Save tag</div>
+                                                <div id="tags" data-id="{{ $id }}" class="flex items-center flex-wrap mb-8 md:mb-0 wow fadeInUp">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- end tags --}}
                                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                                         <div class="mb-4">
                                             <label for="title" class="inline-block mb-2 ml-1 font-bold text-size-xs text-slate-700 dark:text-white/80">Title</label>
@@ -52,6 +66,34 @@
     </main>
 
     <script>
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+
+        function tags(){
+            var id = $("#tags").attr("data-id")
+            $.ajax({
+                type:"GET",
+                dataType:'json',
+                url: "/tags/"+id,
+                success: function(data){
+                    var dataHTML = ""
+                    $.each(data, function(key,value){
+                        dataHTML = dataHTML + `<div class="block py-2 px-5 bg-primary text-white rounded text-xs font-medium mr-2 md:mr-4 lg:mr-2 xl:mr-4 mb-2">
+                                                    <div onclick="deleteTag(${value.id})" class="absolute mr-3 my-auto" style="cursor:pointer; color:red;">
+                                                        x
+                                                    </div>
+                                                    <div class="ml-3">
+                                                        ${value.tag.tag}
+                                                    </div>
+                                                </div>`
+                    })
+                    $('#tags').html(dataHTML);
+                }
+            })
+        }
         function addSlug(){
             var title = $('#title').val()
             $.ajax({
@@ -63,5 +105,37 @@
                 }
             })
         }
+
+        function addTag(){
+            var id = $("#tags").attr("data-id")
+            var tag = $('#tag').val()
+            $.ajax({
+                type:"POST",
+                dataType:'json',
+                data:{post_id: id, tag: tag},
+                url: '/tags/',
+                success: function(data){
+                    $('#tag').val("") 
+                    tags()
+                }
+            })
+        }
+
+        function deleteTag(tag_id){
+            var post_id = $("#tags").attr("data-id")
+            $.ajax({
+                type:"DELETE",
+                dataType:'json',
+                data:{post_id: post_id, tag_id: tag_id},
+                url: '/tags',
+                success: function(data){
+                    tags()
+                }
+            })
+        }
+
+        $( document ).ready(function() {
+            tags()
+        });
     </script>
 </x-app-layout>

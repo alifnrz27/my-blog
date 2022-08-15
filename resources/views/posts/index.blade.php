@@ -91,6 +91,7 @@
                                         <span class="font-semibold leading-tight text-size-xs dark:text-white dark:opacity-80  text-dark">${value.created_at}</span>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                        <a href="/journals/${value.slug}" class="font-semibold leading-tight text-size-xs dark:text-white dark:opacity-80  text-dark"> View </a>
                                         <a href="/posts/${value.slug}/edit" class="font-semibold leading-tight text-size-xs dark:text-white dark:opacity-80  text-dark"> Edit </a>
                                         <button onclick="deletePost('${value.slug}')" class="font-semibold leading-tight text-size-xs dark:text-white dark:opacity-80 bg-danger text-dark"> Hapus </button>
                                     </td>

@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/journals/all', function () {
-    $data = Post::get();
+    $data = Post::where(['status_id' => 1])->get();
         return response()->json($data);
 });
 

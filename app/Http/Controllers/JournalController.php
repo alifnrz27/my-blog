@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JournalController extends Controller
 {
@@ -46,15 +47,18 @@ class JournalController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::where(['slug'=> $slug, 'status_id' => 1])->first();
+        $post = Post::where(['slug'=> $slug])->first();
 
-        // dd($post->user);
         if(!$post){
             abort(404);
         }
 
         if ($post->status_id == 2){
-            abort(404);
+            if(!Auth::check()){
+                abort(404);
+            }elseif($post->user_id != auth()->user()->id){
+                abort(404);
+            }
         }
 
 
