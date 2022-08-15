@@ -22,6 +22,15 @@
                                             <span class="slider round">Publish</span>
                                           </label>
                                     </div>
+                                    <div class="mb-4">
+                                        <div class="border-gray-300">
+                                            <label for="category" class="inline-block mb-2 ml-1 font-bold text-size-xs text-slate-700 dark:text-white/80">Category</label>
+                                            <input value="" placeholder="choose category" list="categories" type="text" id="category" name="category"class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-dark text-size-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none mb-4" autocomplete="off"/>    
+                                                <datalist id="categories">
+                                                    
+                                                </datalist>
+                                        </div>
+                                    </div>
                                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                                         <div class="mb-4">
                                             <label for="title" class="inline-block mb-2 ml-1 font-bold text-size-xs text-slate-700 dark:text-white/80">Title</label>
@@ -67,5 +76,25 @@
                 }
             })
         }
+
+        function categories(){
+            $.ajax({
+                type:"GET",
+                dataType:'json',
+                url: "/categories",
+                success: function(data){
+                    var dataHTML = ""
+                    $.each(data, function(key,value){
+                        dataHTML = dataHTML + `<option value="${value.category}">${value.category}</option>`
+                    })
+                    $('#categories').html(dataHTML);
+                }
+            })
+        }
+
+
+        $( document ).ready(function() {
+            categories()
+        });
     </script>
 </x-app-layout>

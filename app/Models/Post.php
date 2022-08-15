@@ -14,6 +14,8 @@ class Post extends Model
         'title',
         'slug',
         'content',
+        'image',
+        'category_id',
         'status_id',
     ];
 
@@ -35,5 +37,10 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

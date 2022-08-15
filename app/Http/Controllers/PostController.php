@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\User;
 
 class PostController extends Controller
@@ -49,11 +50,23 @@ class PostController extends Controller
             $status_id = 2;
         }
 
+        $category_id = 0;
+        if($request->category != null){
+            $category = Category::where('category', ucfirst($request->category))->first();
+
+            if(!$category){
+                Category::create(['category'=>ucfirst($request->category)]);
+                $category = Category::where('category', ucfirst($request->category))->first();
+            }
+            $category_id = $category->id;
+        }
+
         Post::create([
             'user_id'=>auth()->user()->id,
             'title'=>$request->title,
             'slug'=>$request->slug,
             'content'=>$request->content,
+            'category_id' => $category_id,
             'status_id'=>$status_id,
         ]);
 
@@ -83,7 +96,11 @@ class PostController extends Controller
             abort(404);
         }
 
-        return view('posts.edit', $post);
+        $post = Post::with(['category'])->where(['id' => $post->id])->first();
+
+        // dd($post->category->category);
+
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -108,8 +125,21 @@ class PostController extends Controller
         if($request->slug != $post->slug){
             $validate['slug'] = 'required|unique:posts';
         }
-
         $request->validate($validate);
+
+        $category_id = 0;
+        if($request->category != null){
+            $category = Category::where(['category' => ucfirst($request->category)])->first();
+            if(!$category){
+                Category::create([
+                    'category' => ucfirst($request->category),
+                ]);
+            }
+
+            $category = Category::where(['category' => ucfirst($request->category)])->first();
+            $category_id = $category->id;
+        }
+        
 
         if($request->status_id == 'on'){
             $status_id = 1;
@@ -121,6 +151,7 @@ class PostController extends Controller
             'title' => $request->title,
             'slug' => $request->slug,
             'content' => $request->content,
+            'category_id' => $category_id,
             'status_id' =>$status_id
         ]);
 

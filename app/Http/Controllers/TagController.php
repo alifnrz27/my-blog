@@ -49,6 +49,14 @@ class TagController extends Controller
             $tag = Tag::where(['tag'=> $nameTag])->first();
         }
 
+        $checkTag = TagPost::where([
+            'post_id' => $request->post_id,
+            'tag_id' => $tag->id
+        ])->first();
+        if($checkTag){
+            return true;
+        }
+
 
         TagPost::create([
             'post_id' => $request->post_id,

@@ -111,7 +111,5 @@
             })
         }
 
-
-
     </script>
 </x-app-layout>
